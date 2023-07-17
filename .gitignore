@@ -22,6 +22,7 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+bower_components
 
 # Optional npm cache directory
 .npm
@@ -49,3 +50,22 @@ jspm_packages
 
 # pytest cache
 .pytest_cache
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+*.sublime*
+
+psd
+thumb
+sketch
