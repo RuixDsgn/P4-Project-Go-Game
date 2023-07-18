@@ -41,7 +41,7 @@ class User(db.Model, SerializerMixin):
         if not existing_user:
             if 5 < len(name) < 20 and ' ' not in name:
                 for word in forbidden_words:
-                    if word not in name:
+                    if word not in func.lower(name):
                         return name
                     else:
                         raise ValueError('Language.')
@@ -75,7 +75,7 @@ class Review(db.Model, SerializerMixin):
         forbidden_words = ['fuck','shit','bitch']
         if 50 < len(content):
             for word in forbidden_words:
-                if word in content:
+                if word in func.lower(content):
                     raise ValueError("Language.")
             return content
         else:
