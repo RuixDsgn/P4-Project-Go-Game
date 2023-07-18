@@ -5,7 +5,7 @@ const { Search } = Input;
 
 const SearchGame = () => (
   <>
-    <Search placeholder="search for games here" enterButton />
+    <Search style={{width: '50%', float: 'right'}} size='middle' placeholder="search for games here" enterButton />
   </>
 );
 export default SearchGame;

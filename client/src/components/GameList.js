@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import GameCard from './GameCard'
 
+
 const GameList = () => {
+
   return (
-    <div>GameList</div>
+    <div>
+      <GameCard />
+    </div>
   )
+
 }
 
 export default GameList

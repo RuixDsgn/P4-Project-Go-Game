@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserAddOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 
 const items = [
@@ -16,7 +16,7 @@ const items = [
   {
     label: 'sign in',
     key: 'signin',
-    // icon: <FontAwesomeIcon icon="fa-solid fa-arrow-right-to-bracket" />,
+    icon: <UserAddOutlined />,
     children: [
       {
         type: 'group',
