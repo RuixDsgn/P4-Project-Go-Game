@@ -5,8 +5,17 @@ import Header from "./Header";
 import NavBar from "./NavBar";
 import SearchGame from "./SearchGame";
 
-
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/check_session").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
   return <div>
     <Header />
     <NavBar />
