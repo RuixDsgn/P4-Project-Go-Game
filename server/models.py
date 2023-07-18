@@ -101,6 +101,19 @@ class Cart(db.Model, SerializerMixin):
 class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
+    order_number = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default = datetime.utcnow)
     updated_at = db.Column(db.DateTime, default = datetime.utcnow, onupdate = datetime.utcnow)
 
+class Review(db.Model, SerializerMixin):
+    __tablename__ = 'reviews'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    title = db.Column(db.String, nullable=False)
+    rating = db.Column(db.Integer)
+    content = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, default = datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default = datetime.utcnow, onupdate = datetime.utcnow)
+
+    # need to add db.relationship to user and game
