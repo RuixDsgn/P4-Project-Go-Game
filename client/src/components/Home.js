@@ -1,8 +1,13 @@
 import React from 'react'
+import Hero from "./Hero"
+import GamePage from "./GamePage"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+    <Hero />
+    <GamePage />
+    </div>
   )
 }
 

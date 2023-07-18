@@ -26,7 +26,7 @@ class Games(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.name ="Nintendo Switch"; limit 10;'})
+                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.id ="6,130,167,169"; limit 500;'})
         return response.json()
 api.add_resource(Games, '/games')
 
