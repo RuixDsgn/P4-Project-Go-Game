@@ -26,9 +26,55 @@ class Games(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.name ="Nintendo Switch"; limit 10;'})
+                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.id ="6,130,167,169"; limit 500;'})
         return response.json()
 api.add_resource(Games, '/games')
+
+class GamesById(Resource):
+    def get(self, id):
+        access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
+        response = post('https://api.igdb.com/v4/games', 
+                        **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
+                        'data': f'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id = {id}; limit 500;'})
+        return response.json()
+api.add_resource(Games, '/games/<int:id>')
+
+class Ps5(Resource):
+    def get(self):
+        access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
+        response = post('https://api.igdb.com/v4/games', 
+                        **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
+                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id ="167"; limit 3;'})
+        return response.json()
+api.add_resource(Ps5, '/games/ps5')
+
+class Nintendo(Resource):
+    def get(self):
+        access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
+        response = post('https://api.igdb.com/v4/games', 
+                        **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
+                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id ="130"; limit 3;'})
+        return response.json()
+api.add_resource(Nintendo, '/games/ninentdo-switch')
+
+class Xbox(Resource):
+    def get(self):
+        access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
+        response = post('https://api.igdb.com/v4/games', 
+                        **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
+                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id ="169"; limit 3;'})
+        return response.json()
+api.add_resource(Xbox, '/games/xbox')
+
+class Pc(Resource):
+    def get(self):
+        access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
+        response = post('https://api.igdb.com/v4/games', 
+                        **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
+                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id ="6"; limit 3;'})
+        return response.json()
+api.add_resource(Pc, '/games/pc')
+
 
 class Register(Resource):
     def post(self):

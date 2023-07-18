@@ -15,6 +15,10 @@ function App() {
     });
   }, []);
 
+  // useEffect(() => {
+  //   fetch()
+  // }, [])
+
   return <div>
     <Header />
     <br></br>
