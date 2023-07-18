@@ -81,5 +81,6 @@ const NavBar = ({user}) => {
       </nav>
     </Menu>
   );
+
 };
 export default NavBar;

@@ -35,6 +35,10 @@ function App() {
     });
   }, []);
 
+  // useEffect(() => {
+  //   fetch()
+  // }, [])
+
   return <div>
     <Header user={user}/>
     <br></br>
