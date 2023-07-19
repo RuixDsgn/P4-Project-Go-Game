@@ -1,5 +1,6 @@
 import React from 'react'
 import GameCard from "./GameCard"
+import {Row, Col} from 'antd'
 
 const GamesAll = ({games}) => {
 
@@ -12,9 +13,10 @@ const GamesAll = ({games}) => {
   }
 
   return (
-    <div>
+    <Row>
       {renderGames()}
-    </div>
+    </Row>
+
   )
 }
 
