@@ -16,6 +16,7 @@ function App() {
   const [allXboxGames, setAllXboxGames] = useState({});
   const [allSwitchGames, setAllSwitchGames] = useState({});
   const [allPCGames, setAllPCGames] = useState({});
+  const [searchGames, setSearchGames] = useState("")
  
 
   useEffect(() => {
@@ -33,11 +34,40 @@ function App() {
       console.log(allGamesData);
       console.log(allGames)
     });
+
+    fetch('/games/ps5')
+      .then(r => r.json())
+      .then(ps5GameData => {
+        setAllPlayStationGames(ps5GameData)
+        console.log(ps5GameData)
+        console.log(allPlayStationGames)
+      })
+    
+    fetch('/games/nintendo-switch')
+      .then(r => r.json())
+      .then(nintendoGameData => {
+        setAllSwitchGames(nintendoGameData)
+        console.log(nintendoGameData)
+        console.log(allSwitchGames)
+      })
+    
+    fetch('/games/xbox')
+      .then(r => r.json())
+      .then(xboxGameData => {
+        setAllXboxGames(xboxGameData)
+        console.log(xboxGameData)
+        console.log(allXboxGames)
+      }) 
+
+    fetch('/games/pc')
+      .then(r => r.json())
+      .then(pcGameData => {
+        setAllPCGames(pcGameData)
+        console.log(pcGameData)
+        console.log(allPCGames)
+      })
   }, []);
 
-  // useEffect(() => {
-  //   fetch()
-  // }, [])
 
   return <div>
     <Header user={user}/>
