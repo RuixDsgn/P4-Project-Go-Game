@@ -26,7 +26,7 @@ class Games(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.id ="6,130,167,169"; limit 500;'})
+                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & rating > 85;limit 500;'})
         return response.json()
 api.add_resource(Games, '/games')
 
@@ -35,7 +35,7 @@ class GamesById(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': f'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id = {id}; limit 500;'})
+                        'data': f'fields id, name, rating, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id = {id}; limit 500;'})
         return response.json()
 api.add_resource(GamesById, '/games/<int:id>')
 
@@ -44,7 +44,7 @@ class Ps5(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.id =167; limit 3;'})
+                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url;where platforms.name = "PlayStation 5" & name ~ *"ar"*;limit 3;'})
         return response.json()
 api.add_resource(Ps5, '/games/ps5')
 
@@ -53,7 +53,7 @@ class Nintendo(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.id=130; limit 3;'})
+                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url;where platforms.name = "Nintendo Switch" & name ~ *"sup"*;limit 3;'})
         return response.json()
 api.add_resource(Nintendo, '/games/ninentdo-switch')
 
@@ -62,7 +62,7 @@ class Xbox(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.id =169; limit 3;'})
+                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url;where platforms.name = "Xbox Series X|S" & name ~ *"elden"*;limit 3;'})
         return response.json()
 api.add_resource(Xbox, '/games/xbox')
 
@@ -71,7 +71,7 @@ class Pc(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where platforms.id =6; limit 3;'})
+                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url;where platforms.name = "PC (Microsoft Windows)" & name ~ *"de"*;limit 3;'})
         return response.json()
 api.add_resource(Pc, '/games/pc')
 

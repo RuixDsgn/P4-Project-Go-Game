@@ -18,7 +18,7 @@ const GameCard = ({game}) => {
 
   const genreList = Array.from(genreSet);
   const description = genreList.join(", ");
-  console.log(description);
+  // console.log(description);
 
   return(
     <Card
