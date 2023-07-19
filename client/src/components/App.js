@@ -75,10 +75,10 @@ function App() {
     <br></br>
     <Routes>
       <Route path="/orders" element={<OrderPage/>}/>
-      <Route path="/all_games" element={<GamesAll />}/>
+      <Route path="/all_games" element={<GamesAll games = {allGames}/>}/>
       <Route path="/signup" element={<Signup />}/>
       <Route path="/cart" element={<Cart />}/>
-      <Route path='/' element = {<Home />}/>
+      <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
     </Routes>
 
   </div>

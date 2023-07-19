@@ -10,7 +10,7 @@ const contentStyle = {
   background: '#364d79',
 };
 
-const GamePage = () => {
+const GamePage = ({xbox, playstation, nintendo, pc}) => {
 
   return (
     <div style={{ margin: 0 }}>
@@ -19,7 +19,7 @@ const GamePage = () => {
       <h4>Top PS5 Games</h4>
           <Row>
             <Col xs={{ span: 5, offset: 1,}} lg={{ span: 6, offset: 2,}}>
-              <GameList />
+              <GameList games = {playstation}/>
             </Col>
           </Row>
       </div>
@@ -28,16 +28,25 @@ const GamePage = () => {
       <h4>Top XBOX S|X Games</h4>
           <Row>
             <Col xs={{ span: 5, offset: 1,}} lg={{ span: 6, offset: 2,}}>
-              <GameList />
+              <GameList games = {xbox}/>
             </Col>
           </Row>
       </div>
   
       <div>
+        <h4>Top Switch Games</h4>
+          <Row>
+            <Col xs={{ span: 5, offset: 1,}} lg={{ span: 6, offset: 2,}}>
+              <GameList games = {nintendo}/>
+            </Col>
+          </Row>
+      </div>
+
+      <div>
       <h4>Top PC Games</h4>
           <Row>
             <Col xs={{ span: 5, offset: 1,}} lg={{ span: 6, offset: 2,}}>
-              <GameList />
+              <GameList games = {pc}/>
             </Col>
           </Row>
       </div>

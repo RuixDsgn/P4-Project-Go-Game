@@ -2,11 +2,17 @@ import React, {useState} from 'react'
 import GameCard from './GameCard'
 
 
-const GameList = () => {
-
+const GameList = ({games}) => {
+  function renderGameCards(){
+    return games.map((game) => {
+      return(
+        <GameCard game = {game}/>
+      )
+    })
+  }
   return (
     <div>
-      <GameCard />
+      {renderGameCards()}
     </div>
   )
 
