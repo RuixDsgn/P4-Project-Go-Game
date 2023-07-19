@@ -71,7 +71,7 @@ const NavBar = ({user}) => {
   };
 
   return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+    <Menu style={{position: 'relative', display: 'flex', justifyContent: 'center'}} onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <nav>
         {items.map((item) => (
             <Menu.Item key={item.key} icon={item.icon}>

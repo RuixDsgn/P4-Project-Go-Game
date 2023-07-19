@@ -10,6 +10,7 @@ import Login from "./Login"
 import Cart from "./Cart"
 import Home from "./Home"
 import SearchResults from "./SearchResults"
+import GameProduct from "./GameProductPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -86,6 +87,7 @@ function App() {
       <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
       <Route path='/register' element = {<Signup onRegister ={handleUser}/>}/>
       <Route path='/search' element = {<SearchResults results = {searchGames}/>}/>
+      <Route path='/product' element = {<GameProduct  />}/>
     </Routes>
 
   </div>
