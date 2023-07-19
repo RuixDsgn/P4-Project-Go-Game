@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBar from './NavBar'
 import SearchGame from './SearchGame'
 
-const Header = () => {
+const Header = ({games, SearchGames,setSearchGames}) => {
   return (
     <div>
       <Link to="/">
@@ -11,7 +11,7 @@ const Header = () => {
       </Link>
         <div>
           <NavBar />
-          <SearchGame />
+          <SearchGame games={games} searchGame={SearchGames} setSearchGames={setSearchGames}/>
         </div>
     </div>
   )

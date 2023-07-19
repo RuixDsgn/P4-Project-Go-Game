@@ -17,7 +17,6 @@ function App() {
   const [allXboxGames, setAllXboxGames] = useState([]);
   const [allSwitchGames, setAllSwitchGames] = useState([]);
   const [allPCGames, setAllPCGames] = useState([]);
-  const [searchGames, setSearchGames] = useState("")
  
 
   useEffect(() => {
@@ -72,9 +71,10 @@ function App() {
   const handleUser = (user) => {
     setUser(user)
   }
+  const [searchGames, setSearchGames] = useState("")
 
   return <div>
-    <Header user={user}/>
+    <Header games={allGames} searchGames={searchGames} setSearchGames={setSearchGames} user={user}/>
     <br></br>
     <br></br>
     <Routes>

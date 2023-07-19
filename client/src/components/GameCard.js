@@ -1,6 +1,6 @@
 import React from 'react';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card } from 'antd';
+import { EditOutlined, EllipsisOutlined, LikeOutlined } from '@ant-design/icons';
+import { Avatar, Card, Col } from 'antd';
 
 const { Meta } = Card;
 const GameCard = ({game}) => {
@@ -21,6 +21,7 @@ const GameCard = ({game}) => {
   // console.log(description);
 
   return(
+    <Col sm={4} md={6} lg={8}>
     <Card
     style={{
       width: 300,
@@ -32,7 +33,7 @@ const GameCard = ({game}) => {
       />
     }
     actions={[
-      <SettingOutlined key="setting" />,
+      <LikeOutlined key="like"/>,
       <EditOutlined key="edit" />,
       <EllipsisOutlined key="ellipsis" />,
     ]}
@@ -43,6 +44,7 @@ const GameCard = ({game}) => {
       description={description || genres}
     />
   </Card>
+  </Col>
   )
 };
 export default GameCard;
