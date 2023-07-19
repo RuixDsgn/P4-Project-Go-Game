@@ -30,6 +30,16 @@ class Games(Resource):
         return response.json()
 api.add_resource(Games, '/games')
 
+class GameSearch(Resource):
+    def get(self):
+        results = request.args.get('results')
+        access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
+        response = post('https://api.igdb.com/v4/games', 
+                        **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
+                        'data': f'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & name ~ *"{results}"*;limit 500;'})
+        return response.json()     
+api.add_resource(GameSearch, '/games/search')  
+
 class GamesById(Resource):
     def get(self, id):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
@@ -55,14 +65,14 @@ class Nintendo(Resource):
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
                         'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url;where platforms.name = "Nintendo Switch" & name ~ *"sup"*;limit 3;'})
         return response.json()
-api.add_resource(Nintendo, '/games/ninentdo-switch')
+api.add_resource(Nintendo, '/games/nintendo_switch')
 
 class Xbox(Resource):
     def get(self):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url;where platforms.name = "Xbox Series X|S" & name ~ *"elden"*;limit 3;'})
+                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url;where platforms.name = "Xbox Series X|S" & name ~ *"elde"*;limit 3;'})
         return response.json()
 api.add_resource(Xbox, '/games/xbox')
 
@@ -135,8 +145,6 @@ class Logout(Resource):
         return {}, 204
 
 api.add_resource(Logout, '/logout')
-
-
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
