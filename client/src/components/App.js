@@ -11,11 +11,11 @@ import Home from "./Home"
 
 function App() {
   const [user, setUser] = useState(null);
-  const [allGames, setAllGames] = useState({});
-  const [allPlayStationGames, setAllPlayStationGames] = useState({});
-  const [allXboxGames, setAllXboxGames] = useState({});
-  const [allSwitchGames, setAllSwitchGames] = useState({});
-  const [allPCGames, setAllPCGames] = useState({});
+  const [allGames, setAllGames] = useState([]);
+  const [allPlayStationGames, setAllPlayStationGames] = useState([]);
+  const [allXboxGames, setAllXboxGames] = useState([]);
+  const [allSwitchGames, setAllSwitchGames] = useState([]);
+  const [allPCGames, setAllPCGames] = useState([]);
   const [searchGames, setSearchGames] = useState("")
  
 
