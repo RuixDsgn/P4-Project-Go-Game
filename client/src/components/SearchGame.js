@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom"
 import { Button, Input, Select, Space } from 'antd';
 // import { Input } from 'antd';
 
+
 const { Search } = Input;
 
 function SearchGame({games, searchGames, setSearchGames}) {
@@ -12,6 +13,7 @@ function SearchGame({games, searchGames, setSearchGames}) {
     navigate(`/search?results=${encodeURIComponent(searchGames)}`)
   }
 
+
   const handleGameSearch = e => {
     setSearchGames(e.target.value)
     console.log(searchGames)
@@ -19,9 +21,9 @@ function SearchGame({games, searchGames, setSearchGames}) {
 
   return (
     <div>
-     <Search style={{width: '50%', float: 'right'}} size='middle' placeholder="search for games here" enterButton onChange={handleGameSearch} />
-    {/* <Input defaultValue="Combine input and button" /> */}
-    <Button type="primary"onClick={handleSubmit}>Submit</Button>
+
+        <Input style={{width: '50%'}} placeholder="search for games here" onChange={handleGameSearch}/>
+        <Button type="primary" onClick={handleGameSearch}>Submit</Button>
     </div>
 
   )
