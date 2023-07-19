@@ -1,16 +1,16 @@
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData, func
 from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
-import bcrypt
 from config import db
+import bcrypt
 
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
 
-db = SQLAlchemy(metadata=metadata)
+# db = SQLAlchemy(metadata=metadata)
 
 # ! Games db external, may use internal if issues arise
 # class Games(db.Model, SerializerMixin):
@@ -39,7 +39,7 @@ class User(db.Model, SerializerMixin):
         forbidden_words = ['fuck','shit','bitch']
         existing_user = User.query.filter(func.lower(User.name) == func.lower(name)).first()
         if not existing_user:
-            if 5 < len(name) < 20 and ' ' not in name:
+            if 5 <= len(name) <= 20 and ' ' not in name:
                 for word in forbidden_words:
                     if word not in func.lower(name):
                         return name
@@ -68,7 +68,7 @@ class Review(db.Model, SerializerMixin):
     rating = db.Column(db.Integer)
     content = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    game_id = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default = datetime.utcnow)
     updated_at = db.Column(db.DateTime, default = datetime.utcnow, onupdate = datetime.utcnow)
 
@@ -87,7 +87,7 @@ class Wishlist(db.Model, SerializerMixin):
     __tablename__ = 'wishlists'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    game_id = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default = datetime.utcnow)
     updated_at = db.Column(db.DateTime, default = datetime.utcnow, onupdate = datetime.utcnow)
 
@@ -95,7 +95,7 @@ class Cart(db.Model, SerializerMixin):
     __tablename__ = 'carts'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    game_id = db.Column(db.Integer)
 
     created_at = db.Column(db.DateTime, default = datetime.utcnow)
     updated_at = db.Column(db.DateTime, default = datetime.utcnow, onupdate = datetime.utcnow)
