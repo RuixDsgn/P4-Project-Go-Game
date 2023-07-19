@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar'
 import SearchGame from './SearchGame'
 
-const Header = ({games, SearchGames,setSearchGames}) => {
+const Header = ({games, searchGames,setSearchGames}) => {
+
   return (
     <div>
       <Link to="/">
@@ -11,7 +12,7 @@ const Header = ({games, SearchGames,setSearchGames}) => {
       </Link>
         <div>
           <NavBar />
-          <SearchGame games={games} searchGame={SearchGames} setSearchGames={setSearchGames}/>
+          <SearchGame games={games} searchGames={searchGames} setSearchGames={setSearchGames}/>
         </div>
     </div>
   )

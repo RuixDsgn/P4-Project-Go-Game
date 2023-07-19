@@ -9,6 +9,7 @@ import Signup from "./Signup"
 import Login from "./Login"
 import Cart from "./Cart"
 import Home from "./Home"
+import SearchResults from "./SearchResults"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -17,7 +18,7 @@ function App() {
   const [allXboxGames, setAllXboxGames] = useState([]);
   const [allSwitchGames, setAllSwitchGames] = useState([]);
   const [allPCGames, setAllPCGames] = useState([]);
- 
+  const [searchGames, setSearchGames] = useState("")
 
   useEffect(() => {
     fetch("/check_session")
@@ -31,19 +32,19 @@ function App() {
     .then(r => r.json())
     .then(allGamesData => {
       setAllGames(allGamesData);
-      console.log(allGamesData);
-      console.log(allGames)
+      // console.log(allGamesData);
+      // console.log(allGames)
     });
 
     fetch('/games/ps5')
       .then(r => r.json())
       .then(ps5GameData => {
         setAllPlayStationGames(ps5GameData)
-        console.log(ps5GameData)
-        console.log(allPlayStationGames)
+        // console.log(ps5GameData)
+        // console.log(allPlayStationGames)
       })
     
-    fetch('/games/nintendo-switch')
+    fetch('/games/nintendo_switch')
       .then(r => r.json())
       .then(nintendoGameData => {
         setAllSwitchGames(nintendoGameData)
@@ -55,23 +56,23 @@ function App() {
       .then(r => r.json())
       .then(xboxGameData => {
         setAllXboxGames(xboxGameData)
-        console.log(xboxGameData)
-        console.log(allXboxGames)
+        // console.log(xboxGameData)
+        // console.log(allXboxGames)
       }) 
 
     fetch('/games/pc')
       .then(r => r.json())
       .then(pcGameData => {
         setAllPCGames(pcGameData)
-        console.log(pcGameData)
-        console.log(allPCGames)
+        // console.log(pcGameData)
+        // console.log(allPCGames)
       })
   }, []);
 
   const handleUser = (user) => {
     setUser(user)
   }
-  const [searchGames, setSearchGames] = useState("")
+
 
   return <div>
     <Header games={allGames} searchGames={searchGames} setSearchGames={setSearchGames} user={user}/>
@@ -84,6 +85,7 @@ function App() {
       <Route path="/cart" element={<Cart />}/>
       <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
       <Route path='/register' element = {<Signup onRegister ={handleUser}/>}/>
+      <Route path='/search' element = {<SearchResults results = {searchGames}/>}/>
     </Routes>
 
   </div>
