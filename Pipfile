@@ -13,6 +13,9 @@ flask-cors = "*"
 requests = "*"
 faker = "*"
 bcrypt = "*"
+pip = "*"
+install = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 

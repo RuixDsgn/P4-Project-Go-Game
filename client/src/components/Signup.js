@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom';
+
 
 const Signup = ({ onRegister }) => {
     const [username, setUsername] = useState("");
@@ -11,13 +13,17 @@ const Signup = ({ onRegister }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username }),
+        body: JSON.stringify({ 
+          "username": username, 
+          "password": password 
+        }),
       })
         .then((r) => r.json())
         .then((user) => onRegister(user));
     }
   
     return (
+      <div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -31,6 +37,9 @@ const Signup = ({ onRegister }) => {
         />
         <button type="submit">Register</button>
       </form>
+      <h4>Already a user? Sign in here!</h4>
+      <Link to ="/signin">Sign in</Link>
+      </div>
     );
   }
 

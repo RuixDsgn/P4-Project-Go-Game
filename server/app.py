@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
-from models import db, User, Review, Wishlist, Cart, Order
-from config import app, db, api
-from flask_migrate import Migrate
-from flask import Flask, request, make_response, session, jsonify
-from flask_restful import Api, Resource
-from requests import post
 import os
+from config import app, api
+from models import User, Review, Wishlist, Cart, Order
+from flask import Flask, request, make_response, session, jsonify
+from flask_migrate import Migrate
+from flask_restful import Resource
+from sqlalchemy import func
+from requests import post
 
+
+# Set the BASE_DIR and DATABASE
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get(
     "DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
 
-app = Flask(__name__)
-api = Api(app)
+# Set the database URI in the app configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
-migrate = Migrate(app, db)
-
-db.init_app(app)
+# Import db and Migrate here after setting the database URI
+from config import db, migrate
 
 class Games(Resource):
     def get(self):
@@ -87,13 +87,23 @@ class Register(Resource):
             return {'message': 'Username and password are required'}, 400
 
         # Check if the username is already taken (e.g., query the database)
-        # Perform any additional validation checks as needed
+        existing_user = User.query.filter(func.lower(User.name) == func.lower(username)).first()
+        if existing_user:
+            return {'message': 'Username is already taken'}, 409  # 409 Conflict status code for duplicate resource
 
-        # Assuming the registration is successful, create a new user record in the database
-        # (e.g., insert a new row into the users table)
+        try:
+            # Assuming the registration is successful, create a new user record in the database
+            new_user = User(name=username, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            response = make_response(new_user.to_dict(), 201)
+        except Exception as e:
+            # Handle any database-related errors here
+            db.session.rollback()
+            return {'message': str(e)}, 400
 
         # Return a success response indicating the registration was successful
-        return {'message': 'Registration successful'}, 200
+        return response  # 201 Created status code for successful resource creation
 api.add_resource(Register, '/register')
 
 class Login(Resource):

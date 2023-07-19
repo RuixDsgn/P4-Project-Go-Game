@@ -6,6 +6,7 @@ import Hero from "./Hero";
 import GamesAll from "./GamesAll";
 import OrderPage from "./OrderPage"
 import Signup from "./Signup"
+import Login from "./Login"
 import Cart from "./Cart"
 import Home from "./Home"
 
@@ -67,6 +68,9 @@ function App() {
       })
   }, []);
 
+  const handleUser = (user) => {
+    setUser(user)
+  }
   const [searchGames, setSearchGames] = useState("")
 
   return <div>
@@ -76,9 +80,10 @@ function App() {
     <Routes>
       <Route path="/orders" element={<OrderPage/>}/>
       <Route path="/all_games" element={<GamesAll games = {allGames}/>}/>
-      <Route path="/signup" element={<Signup />}/>
+      <Route path="/signin" element={<Login onLogin = {handleUser}/>}/>
       <Route path="/cart" element={<Cart />}/>
       <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
+      <Route path='/register' element = {<Signup onRegister ={handleUser}/>}/>
     </Routes>
 
   </div>
