@@ -43,7 +43,39 @@ const GameProduct = () => {
       return <h4>Game Has No Reviews</h4>
     }
   }
+  function renderSimilar(){
+    return game.similar_games.map((game)=>{
+      return <GameCard game={game}/>
+    })
+  }
 
+  function mapGenres(){
+    const genreList = []
+    game.genres.map((genre) => {
+      genreList.push(genre.name)
+    })
+    return genreList.join(', ')
+  }
+
+  function mapPlatforms(){
+    const platformList = []
+      game.platforms.map((platform) => {
+      platformList.push(platform.name)
+    }
+    )
+      return platformList.join(", ")
+
+  }
+
+  const minPrice = 39.99;
+  const maxPrice = 69.99;
+
+  const getRandomPrice = () => {
+  const price = (Math.random() * (maxPrice - minPrice) + minPrice).toFixed(2);
+  return price;
+  }
+
+  const generatedPrice = getRandomPrice()
   return (
     isLoaded ? 
     <div style={{marginLeft: '50px'}}>
