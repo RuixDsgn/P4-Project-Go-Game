@@ -1,5 +1,6 @@
 import React from 'react';
-import { EditOutlined, EllipsisOutlined, LikeOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
+import { EditOutlined, ShoppingCartOutlined, LikeOutlined } from '@ant-design/icons';
 import { Avatar, Card, Col } from 'antd';
 
 const { Meta } = Card;
@@ -20,6 +21,7 @@ const GameCard = ({game}) => {
   const description = genreList.join(", ");
   // console.log(description);
 
+
   return(
     <Col sm={4} md={6} lg={8}>
     <Card
@@ -27,15 +29,17 @@ const GameCard = ({game}) => {
       width: 300,
     }}
     cover={
-      <img
+      <NavLink to={'/product'}>
+        <img style={{width: '100%'}}
         alt="example"
         src={cover ? cover.url : "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"}
       />
+      </NavLink>
     }
     actions={[
       <LikeOutlined key="like"/>,
       <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
+      <ShoppingCartOutlined key='cart'/>,
     ]}
   >
     <Meta
