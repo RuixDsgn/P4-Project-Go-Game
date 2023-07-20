@@ -17,7 +17,6 @@ const GameList = ({games}) => {
       {renderGameCards()}
     </Row>
   )
-
 }
 
 export default GameList
