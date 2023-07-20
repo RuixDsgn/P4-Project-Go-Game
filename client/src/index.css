@@ -11,3 +11,14 @@ img {
     height: 350px;
     width: 100%;
 }
+
+#product-card {
+    width: 200px;
+    border-style: none;
+    border-radius: 20px;
+    box-shadow: 1px;
+}
+
+/* #product-img {
+    width: ;
+} */
