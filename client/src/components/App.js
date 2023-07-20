@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import GamePage from "./GamePage";
 import Header from "./Header";
-import Hero from "./Hero";
 import GamesAll from "./GamesAll";
 import OrderPage from "./OrderPage"
 import Signup from "./Signup"
@@ -12,6 +10,8 @@ import Home from "./Home"
 import SearchResults from "./SearchResults"
 import GameProduct from "./GameProductPage";
 import Profile from "./Profile";
+import NewReview from "./NewReview";
+import Wishlist from "./Wishlist"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -89,6 +89,8 @@ function App() {
       <Route path='/search' element = {<SearchResults results = {searchGames}/>}/>
       <Route path='/product/:id' element = {<GameProduct  />}/>
       <Route path='/profile' element = {<Profile user = {user}/>}/>
+      <Route path="/reviews/new" element = {<NewReview />}/>
+      <Route path="/wishlist/" element = {<Wishlist />}/>
       <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
     </Routes>
 

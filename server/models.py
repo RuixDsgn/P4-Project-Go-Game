@@ -1,20 +1,12 @@
 # from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData, func
+# from ipdb import set_trace
+from sqlalchemy import func
 from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 from config import db
 import bcrypt
-from ipdb import set_trace
 
-metadata = MetaData(naming_convention={
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-})
-
-
-# ! Games db external, may use internal if issues arise
-# class Games(db.Model, SerializerMixin):
-#     pass
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -106,6 +98,7 @@ class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
     order_number = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default = datetime.utcnow)
     updated_at = db.Column(db.DateTime, default = datetime.utcnow, onupdate = datetime.utcnow)
 

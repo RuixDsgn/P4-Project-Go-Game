@@ -1,29 +1,42 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import GameReviewCard from './GameReviewCard'
 
 const Profile = ({user}) => {
-  function handleClick(){
-    if(user){
-      console.log(user)
-    }
-    else{
-      console.log("not logged in")
-    }
-  }
+  const [reviews, setReviews] = useState([])
+  const [isLoaded, setIsLoaded] = useState(false)
+  useEffect(()=>{
+      fetch('/reviews')
+        .then((response) => response.json())
+        .then((reviewData) => {
+          setReviews(reviewData);
+          console.log(reviewData);
+          setIsLoaded(true)
+        });
+  },[])
+
   const name = user?.name ?? "Loading...";
   const created_at = user?.created_at ?? "Loading...";
  
   function renderReviews(){
-    //map reviews where user_id = user.id
-    //TODO ReviewCard AND ReviewPage
+    if(reviews.length > 0){
+      const userReviews = reviews.filter((review) => review.user_id == user.id)
+      console.log(userReviews)
+      return userReviews.map((review) => {
+        return <GameReviewCard review = {review}/>
+      })
+    }
+    else{
+      return <h4>User Has No Reviews</h4>
+    }
   }
 
   return (
     <div>
-      <div>Profile</div>
-      <button onClick={handleClick}>Click!</button>
       <h2>{user ? name : null}</h2>
       <h2>Reviews</h2>
-      {renderReviews()}
+      <div>
+      {isLoaded ?renderReviews() : "Loading..."}
+      </div>
       <p>Account created on {user ? created_at : null}</p>
     </div>
 

@@ -13,7 +13,6 @@ function SearchGame({games, searchGames, setSearchGames}) {
     navigate(`/search?results=${encodeURIComponent(searchGames)}`)
   }
 
-
   const handleGameSearch = e => {
     setSearchGames(e.target.value)
     console.log(searchGames)
@@ -26,7 +25,5 @@ function SearchGame({games, searchGames, setSearchGames}) {
     </div>
 
   )
- 
-  
-  };
+};
 export default SearchGame;
