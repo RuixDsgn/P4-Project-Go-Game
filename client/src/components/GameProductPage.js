@@ -19,53 +19,30 @@ const GameProduct = () => {
         setIsLoaded(true)
       });
   }, []);
-
-
-  function renderScreenshots(){
-    return game.screenshots.map((screenshot)=>{
-      return <img src={screenshot.url}/>
-    })
-  }
-
-  function renderSimilar(){
-    return game.similar_games.map((game)=>{
-      return (
-        <Col>
-            <GameCard game={game}/>
-        </Col>
-
-      )
-    })
-  }
-
-  function mapGenres(){
-    const genreList = []
-    game.genres.map((genre) => {
-      genreList.push(genre.name)
-    })
-    return genreList.join(', ')
-  }
-
-  function mapPlatforms(){
-    const platformList = []
-      game.platforms.map((platform) => {
-      platformList.push(platform.name)
+  const [reviews, setReviews] = useState([])
+  useEffect(()=>{
+      fetch('/reviews')
+        .then((response) => response.json())
+        .then((reviewData) => {
+          setReviews(reviewData);
+          console.log(reviewData);
+        });
+  },[])
+  function renderReviews(){
+    if(reviews.length > 0){
+      const gameReviews = reviews.filter((review) => review.game_id == game.id)
+      while(reviews.length > 3){
+        reviews.pop()
+      }
+      console.log(gameReviews)
+      return gameReviews.map((review) => {
+        return <GameReviewCard review = {review}/>
+      })
     }
-    )
-      return platformList.join(", ")
-
+    else{
+      return <h4>Game Has No Reviews</h4>
+    }
   }
-
-  const minPrice = 39.99;
-  const maxPrice = 69.99;
-
-  const getRandomPrice = () => {
-  const price = (Math.random() * (maxPrice - minPrice) + minPrice).toFixed(2);
-  return price;
-  }
-
-  const generatedPrice = getRandomPrice()
-  
 
   return (
     isLoaded ? 
@@ -86,7 +63,7 @@ const GameProduct = () => {
 
       <div>
           <h4>Recent reviews from players</h4>
-          <GameReviewCard />
+          {renderReviews()}
       </div>
       <br></br><br></br>
       <div>
