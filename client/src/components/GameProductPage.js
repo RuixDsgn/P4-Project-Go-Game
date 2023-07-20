@@ -32,7 +32,7 @@ const GameProduct = () => {
     })
   }
     
-  return (
+  return (isLoaded?
     <div style={{marginLeft: '50px'}}>
       <Row className='product-card'>
           <Col>
@@ -72,14 +72,8 @@ const GameProduct = () => {
           </Col>
       </Row>
       </div>
-
-
-
-
-
-
-
-    </div>
+    </div>:
+    <div>Loading...</div>
   )
 }
 

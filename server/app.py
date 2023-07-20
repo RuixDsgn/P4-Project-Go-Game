@@ -91,6 +91,118 @@ class Pc(Resource):
         return response.json()
 api.add_resource(Pc, '/games/pc')
 
+class Reviews(Resource):
+    def get(self):
+        reviews_list = [review.to_dict() for review in Review.query.all()]
+        return make_response(reviews_list, 200)
+    def post(self):
+        form_json = request.get_json()
+        try:
+            new_review = Review(
+                content=form_json['content'],
+                rating=form_json['rating'],
+                user_id=form_json['user_id'],
+                game_id=form_json['game_id'],
+                title = form_json['title']
+            )
+            db.session.add(new_review)
+            db.session.commit()
+            return make_response(new_review.to_dict(), 201)
+        except ValueError as e:
+            return make_response({'error': str(e)}, 400)
+api.add_resource(Reviews, '/reviews')
+
+class ReviewsById(Resource):
+    def get(self, id):
+        review_get = Review.query.filter_by(id=id).first()
+        if review_get:
+            return make_response(review_get.to_dict(), 200)
+        else:
+            return make_response({"error": "review not found"}, 404)
+    def delete(self, id):
+        review_get = Review.query.filter_by(id=id).first()
+        if review_get:
+            db.session.delete(review_get)
+            db.session.commit()
+            return make_response({}, 204)
+        else:
+            return make_response({"error": "review not found"}, 404)
+    def patch(self, id):
+        review_get = Review.query.filter_by(id=id).first()
+        if review_get:
+            try:
+                for attr in request.form:
+                    setattr(review_get, attr, request.form[attr])
+                db.session.commit()
+                return make_response(review_get.to_dict(), 202)
+            except ValueError as e:
+                return make_response({'error': str(e)}, 400)
+        else:
+            return make_response({"error": "Review not found"}, 404)
+api.add_resource(ReviewsById, '/reviews/<int:id>')
+
+class Wishlists(Resource):
+    def get(self):
+        wishlists_list = [wishlist.to_dict() for wishlist in Wishlist.query.all()]
+        return make_response(wishlists_list, 200)
+    def post(self):
+        form_json = request.get_json()
+        try:
+            new_wishlist = Wishlist(
+                content=form_json['content'],
+                rating=form_json['rating'],
+                user_id=form_json['user_id'],
+                game_id=form_json['game_id'],
+                title = form_json['title']
+            )
+            db.session.add(new_wishlist)
+            db.session.commit()
+            return make_response(new_wishlist.to_dict(), 201)
+        except ValueError as e:
+            return make_response({'error': str(e)}, 400)
+api.add_resource(Wishlists, '/wishlist')
+
+class Carts(Resource):
+    def get(self):
+        carts_list = [cart.to_dict() for cart in Cart.query.all()]
+        return make_response(carts_list, 200)
+    def post(self):
+        form_json = request.get_json()
+        try:
+            new_cart = Cart(
+                content=form_json['content'],
+                rating=form_json['rating'],
+                user_id=form_json['user_id'],
+                game_id=form_json['game_id'],
+                title = form_json['title']
+            )
+            db.session.add(new_cart)
+            db.session.commit()
+            return make_response(new_cart.to_dict(), 201)
+        except ValueError as e:
+            return make_response({'error': str(e)}, 400)
+api.add_resource(Carts, '/cart')
+
+class Orders(Resource):
+    def get(self):
+        orders_list = [order.to_dict() for order in Order.query.all()]
+        return make_response(orders_list, 200)
+    def post(self):
+        form_json = request.get_json()
+        try:
+            new_order = Order(
+                content=form_json['content'],
+                rating=form_json['rating'],
+                user_id=form_json['user_id'],
+                game_id=form_json['game_id'],
+                title = form_json['title']
+            )
+            db.session.add(new_order)
+            db.session.commit()
+            return make_response(new_order.to_dict(), 201)
+        except ValueError as e:
+            return make_response({'error': str(e)}, 400)
+api.add_resource(Orders, '/order')
 
 class Register(Resource):
     def post(self):
