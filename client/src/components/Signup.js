@@ -1,13 +1,15 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = ({ onRegister }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState ("");
+    const navigate = useNavigate();
     
     function handleSubmit(e) {
       e.preventDefault();
+      // console.log(username)
+      // console.log(password)
       fetch("/register", {
         method: "POST",
         headers: {
@@ -19,7 +21,15 @@ const Signup = ({ onRegister }) => {
         }),
       })
         .then((r) => r.json())
-        .then((user) => onRegister(user));
+        .then((user) => {
+          if(!user.errors){
+            onRegister(user)
+            navigate("/")
+          }
+          else{
+            console.log("registration failed")
+          }
+          });
     }
   
     return (

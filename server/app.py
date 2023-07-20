@@ -7,7 +7,12 @@ from flask_migrate import Migrate
 from flask_restful import Resource
 from sqlalchemy import func
 from requests import post
+from dotenv import load_dotenv
 
+dotenv_path = "../.env" 
+load_dotenv(dotenv_path)
+secret_key = os.environ.get("SECRET_KEY")
+app.secret_key = secret_key
 
 # Set the BASE_DIR and DATABASE
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -36,7 +41,7 @@ class GameSearch(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': f'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & name ~ *"{results}"*;limit 500;'})
+                        'data': f'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & name ~ *"{results}"*  & rating > 85;limit 500;'})
         return response.json()     
 api.add_resource(GameSearch, '/games/search')  
 
@@ -91,7 +96,6 @@ class Register(Resource):
         # Get the registration data from the request's JSON body
         username = request.json.get('username')
         password = request.json.get('password')
-
         # Perform any necessary validation on the registration data
         if not username or not password:
             return {'message': 'Username and password are required'}, 400
@@ -110,7 +114,7 @@ class Register(Resource):
         except Exception as e:
             # Handle any database-related errors here
             db.session.rollback()
-            return {'message': str(e)}, 400
+            return {'message': str(e)}, 422
 
         # Return a success response indicating the registration was successful
         return response  # 201 Created status code for successful resource creation
@@ -119,12 +123,23 @@ api.add_resource(Register, '/register')
 class Login(Resource):
 
     def post(self):
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
+        user = User.query.filter(User.name == username).first()
+
         user = User.query.filter(
-            User.username == request.get_json()['username']
+            User.name == request.get_json()['username']
         ).first()
 
-        session['user_id'] = user.id
-        return user.to_dict()
+        if not user:
+            return {'message': 'User not found'}, 404
+        
+        if user.check_password(password):
+            session['user_id'] = user.id
+            return user.to_dict()
+        else:
+            return {'message': 'Invalid credentials'}, 401
 api.add_resource(Login, '/login')
 
 class CheckSession(Resource):

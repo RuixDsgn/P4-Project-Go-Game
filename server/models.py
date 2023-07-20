@@ -5,12 +5,12 @@ from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 from config import db
 import bcrypt
+from ipdb import set_trace
 
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
 
-# db = SQLAlchemy(metadata=metadata)
 
 # ! Games db external, may use internal if issues arise
 # class Games(db.Model, SerializerMixin):
@@ -36,12 +36,13 @@ class User(db.Model, SerializerMixin):
 
     @validates('name')
     def validate_name(self, key, name):
+        print("name")
         forbidden_words = ['fuck','shit','bitch']
-        existing_user = User.query.filter(func.lower(User.name) == func.lower(name)).first()
+        existing_user = User.query.filter(User.name.lower() == name.lower()).first()
         if not existing_user:
             if 5 <= len(name) <= 20 and ' ' not in name:
                 for word in forbidden_words:
-                    if word not in func.lower(name):
+                    if word not in name.lower():
                         return name
                     else:
                         raise ValueError('Language.')
@@ -57,6 +58,7 @@ class User(db.Model, SerializerMixin):
     @password.setter
     def password(self, password):
         if password != 'password':
+            print("something")
             self.set_password(password)
         else:
             raise ValueError("Don't make your password password.")

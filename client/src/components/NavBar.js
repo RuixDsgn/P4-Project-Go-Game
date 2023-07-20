@@ -17,12 +17,13 @@ const NavBar = ({user}) => {
       // icon: <FontAwesomeIcon icon="fa-solid fa-gamepad" />,
       disabled: false,
     },
-    user ? {
-      label: user,
-      key: user,
-      link: '/profile',
-      icon: <UserAddOutlined />,
-      children: [
+    user
+      ? {
+          label: user.name, // Change this label to whatever you want to display as the user's name
+          key: 'user',
+          link: '/profile',
+          icon: <UserAddOutlined />,
+          children: [
         {
           type: 'group',
           label: 'account',
@@ -52,9 +53,10 @@ const NavBar = ({user}) => {
           ],
         },
       ],
-    }:{
+    }      
+    : {
       label: 'signin / signup',
-      key: 'signin / signup',
+      key: 'signin',
       link: '/signin',
     },
     {

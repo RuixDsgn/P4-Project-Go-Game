@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-  
+    const navigate = useNavigate()
+
     function handleSubmit(e) {
       e.preventDefault();
       fetch("/login", {
@@ -12,10 +13,16 @@ function Login({ onLogin }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username }),
+        body: JSON.stringify({ 
+          username: username,
+          password: password 
+      }),
       })
         .then((r) => r.json())
-        .then((user) => onLogin(user));
+        .then((user) => {
+          onLogin(user)
+          navigate("/")
+        });
     }
   
     return (

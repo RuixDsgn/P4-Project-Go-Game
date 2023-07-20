@@ -4,7 +4,7 @@ import { Avatar, Card, Col } from 'antd';
 
 const { Meta } = Card;
 const GameCard = ({game}) => {
-  const {id, name, cover, genres, platforms, screenshots, similar_games, summary, first_release_date} = game;
+  const {id, name, cover, genres} = game;
   let genreSet = new Set();
 
   if (genres && genres.length > 0) {
