@@ -1,8 +1,18 @@
 import React from 'react'
 
-const OrderPage = () => {
+const OrderPage = ({user}) => {
+  function handleClick(){
+    if(user){
+      console.log(user)
+    }
+    else{
+      console.log("not logged in")
+    }
+  }
   return (
-    <div>OrderPage</div>
+    <div>OrderPage
+          <button onClick={handleClick}>Click!</button>
+    </div>
   )
 }
 

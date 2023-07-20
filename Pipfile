@@ -16,6 +16,7 @@ bcrypt = "*"
 pip = "*"
 install = "*"
 sqlalchemy = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

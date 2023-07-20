@@ -76,18 +76,18 @@ function App() {
 
 
   return <div>
-    <Header games={allGames} searchGames={searchGames} setSearchGames={setSearchGames} user={user}/>
+    <Header user = {user} games={allGames} searchGames={searchGames} setSearchGames={setSearchGames}/>
     <br></br>
     <br></br>
     <Routes>
-      <Route path="/orders" element={<OrderPage/>}/>
+      <Route path="/orders" element={<OrderPage user={user}/>}/>
       <Route path="/all_games" element={<GamesAll games = {allGames}/>}/>
       <Route path="/signin" element={<Login onLogin = {handleUser}/>}/>
       <Route path="/cart" element={<Cart />}/>
-      <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
       <Route path='/register' element = {<Signup onRegister ={handleUser}/>}/>
       <Route path='/search' element = {<SearchResults results = {searchGames}/>}/>
       <Route path='/product' element = {<GameProduct  />}/>
+      <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
     </Routes>
 
   </div>

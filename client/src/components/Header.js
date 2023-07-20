@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import NavBar from './NavBar'
 import SearchGame from './SearchGame'
 
-const Header = ({games, searchGames,setSearchGames}) => {
+const Header = ({user, games, searchGames,setSearchGames}) => {
 
   return (
     <div>
@@ -11,7 +11,7 @@ const Header = ({games, searchGames,setSearchGames}) => {
         <h2>GoGame.GG</h2>
       </Link>
         <div>
-          <NavBar />
+          <NavBar user = {user}/>
           <SearchGame games={games} searchGames={searchGames} setSearchGames={setSearchGames}/>
         </div>
     </div>
