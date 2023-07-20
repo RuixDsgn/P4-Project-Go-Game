@@ -24,12 +24,16 @@ const GameCard = ({game}) => {
 
   return(
     <Col sm={4} md={6} lg={8}>
-    <Card
+    <Card 
     style={{
       width: 300,
     }}
     cover={
-      <NavLink to={'/product'}>
+      <NavLink         
+        to={{
+        pathname: `/product/${id}`, // Game ID
+        state: { game }, // Props
+      }}>
         <img style={{width: '100%'}}
         alt="example"
         src={cover ? cover.url : "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"}

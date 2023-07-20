@@ -31,7 +31,7 @@ class Games(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': 'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & rating > 85;limit 500;'})
+                        'data': 'fields id, name, rating, first_release_date, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, similar_games.cover.url, similar_games.genres.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & rating > 85;limit 500;'})
         return response.json()
 api.add_resource(Games, '/games')
 
@@ -41,18 +41,19 @@ class GameSearch(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': f'fields id, name, rating, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & name ~ *"{results}"*  & rating > 85;limit 500;'})
+                        'data': f'fields id, name, rating, first_release_date, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, similar_games.cover.url, similar_games.genres.name, summary, screenshots.url; where platforms.id = [6, 130, 167, 169]  & name ~ *"{results}"*  & rating > 85;limit 500;'})
         return response.json()     
 api.add_resource(GameSearch, '/games/search')  
 
 class GamesById(Resource):
-    def get(self, id):
+    def get(self):
+        id = request.args.get('id')
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': f'fields id, name, rating, first_release_date, genres.name, platforms.name, screenshots.url, screenshots.id, similar_games.name, summary, cover.url; where id = {id}; limit 500;'})
+                        'data': f'fields id, name, rating, first_release_date, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, similar_games.cover.url, similar_games.genres.name, summary, screenshots.url; where id = {id}; limit 1;'})
         return response.json()
-api.add_resource(GamesById, '/games/<int:id>')
+api.add_resource(GamesById, '/games/product')
 
 class Ps5(Resource):
     def get(self):

@@ -5,8 +5,8 @@ import GamePage from "./GamePage"
 const Home = ({xbox, playstation, nintendo, pc}) => {
   return (
     <div>
-    <Hero />
-    <GamePage xbox = {xbox} playstation = {playstation} nintendo = {nintendo} pc={pc}/>
+      <Hero />
+      <GamePage xbox = {xbox} playstation = {playstation} nintendo = {nintendo} pc={pc}/>
     </div>
   )
 }
