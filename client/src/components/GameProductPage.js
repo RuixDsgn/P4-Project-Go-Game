@@ -28,7 +28,7 @@ const GameProduct = () => {
   }
 
   function renderScreenshots(){
-    return game.screenshots.map((screenshot)=>{
+    return game.screenshots.map((screenshot)=> {
       return (
         <Col>
            <img onMouseEnter={ (e) => {setLoadImg(e.target.src)}} style={{width: '50px', height: '50px', marginRight: '10px'}} src={screenshot.url}/>
@@ -36,15 +36,34 @@ const GameProduct = () => {
       )
     })
   }
+  const [reviews, setReviews] = useState([])
+  useEffect(()=>{
+      fetch('/reviews')
+        .then((response) => response.json())
+        .then((reviewData) => {
+          setReviews(reviewData);
+          console.log(reviewData);
+        });
+  },[])
 
+  function renderReviews(){
+    if(reviews.length > 0){
+      const gameReviews = reviews.filter((review) => review.game_id == game.id)
+      while(reviews.length > 3){
+        reviews.pop()
+      }
+      console.log(gameReviews)
+      return gameReviews.map((review) => {
+        return <GameReviewCard review = {review}/>
+      })
+    }
+    else{
+      return <h4>Game Has No Reviews</h4>
+    }
+  }
   function renderSimilar(){
     return game.similar_games.map((game)=>{
-      return (
-        <Col>
-            <GameCard game={game}/>
-        </Col>
-
-      )
+      return <GameCard game={game}/>
     })
   }
 
@@ -111,7 +130,7 @@ const GameProduct = () => {
 
       <div>
           <h4>Recent reviews from players</h4>
-          {/* <GameReviewCard /> */}
+          {renderReviews()}
       </div>
       <br></br><br></br>
       <div>
