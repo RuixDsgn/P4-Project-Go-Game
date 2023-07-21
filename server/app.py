@@ -5,7 +5,7 @@ from config import app, api
 from models import User, Review, Wishlist, Cart, Order
 from flask import Flask, request, make_response, session, jsonify
 from flask_migrate import Migrate
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from sqlalchemy import func
 from requests import post
 from dotenv import load_dotenv
@@ -107,20 +107,42 @@ class Reviews(Resource):
         reviews_list = [review.to_dict() for review in Review.query.all()]
         return make_response(reviews_list, 200)
     def post(self):
-        form_json = request.get_json()
-        try:
-            new_review = Review(
-                content=form_json['content'],
-                # rating=form_json['rating'],
-                user_id=form_json['user_id'],
-                game_id=form_json['game_id'],
-            )
-            db.session.add(new_review)
-            db.session.commit()
+        # form_json = request.get_json()
+        # try:
+        #     new_review = Review(
+        #         content=form_json['content'],
+        #         # rating=form_json['rating'],
+        #         user_id=form_json['user_id'],
+        #         game_id=form_json['game_id'],
+        #     )
+        #     db.session.add(new_review)
+        #     db.session.commit()
 
-            return make_response(new_review.to_dict(), 201)
-        except ValueError as e:
-            return make_response({'error': str(e)}, 400)
+        #     return make_response(new_review.to_dict(), 201)
+        # except ValueError as e:
+        #     return make_response({'error': str(e)}, 400)
+
+        parser = reqparse.RequestParser()
+        parser.add_argument('content', type=str, required=True, help='Content is required')
+        # Uncomment the following line for rating input
+        # parser.add_argument('rating', type=int, required=True, help='Rating is required')
+        parser.add_argument('user_id', type=int, required=True)
+        parser.add_argument('game_id', type=int, required=True)
+        args = parser.parse_args()
+
+        new_review = Review(
+            content=args['content'],
+            # Uncomment the following line for rating input
+            # rating=args['rating'],
+            user_id=args['user_id'],
+            game_id=args['game_id']
+        )
+
+        db.session.add(new_review)
+        db.session.commit()
+
+        return {'message': 'Review posted successfully'}, 201
+
 api.add_resource(Reviews, '/reviews')
 
 class ReviewsById(Resource):

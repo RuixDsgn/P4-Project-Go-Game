@@ -38,8 +38,9 @@ function Login({ onLogin }) {
     }
   
     return (
-      <div>
-                <h3>Login</h3>
+      <div style={{textAlign: 'center'}}>
+        <img src="https://camo.githubusercontent.com/558a9e1af3cdb7fe71bc706ee9c6fe7c662097fc3fd95a910880092bd8b71957/68747470733a2f2f696d6775722e636f6d2f50323271655a4d2e676966" alt="pacman-loading" />
+        <h3>Login</h3>
         <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -47,16 +48,19 @@ function Login({ onLogin }) {
           placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         />
+        <br></br>
+        <br></br>
         <input
           type="text"
           value={password}
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br></br>
+        <br></br>
         <button type="submit">Login</button>
       </form>
-      <h4>Not a user? Sign up here!</h4>
-      <Link to ="/register">Register</Link>
+      <h4>Not a user? Sign up <Link to ="/register">here!</Link></h4>
       </div>
 
     );

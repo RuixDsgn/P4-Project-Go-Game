@@ -28,13 +28,11 @@ const GameReviewCard = ({review}) => {
     }
 
   return (
-    <>
-        <Col>
-        <Card style={{width: '400px'}} type="inner" title={`Review by ${author}`} extra={<a onClick={handleFullReview}>Read More</a>}>
+     <Col>
+        <Card style={{width: '400px', marginRight: '20px'}} type="inner" title={`Review by ${author}`} extra={<a onClick={handleFullReview}>Read More</a>}>
             {preview}
         </Card>
-        </Col>
-    </>
+    </Col>
 );  
 }
 

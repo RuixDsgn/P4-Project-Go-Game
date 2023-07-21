@@ -60,7 +60,9 @@ const GameProduct = ({user}) => {
       }
       // console.log(gameReviews)
       return gameReviews.map((review) => {
-        return <GameReviewCard review = {review}/>
+        return (
+              <GameReviewCard review = {review}/>
+        )
       })
     }
     else{
@@ -141,9 +143,11 @@ const GameProduct = ({user}) => {
       <div>
           <h4>Recent reviews from players</h4>
           <Row>
-          {renderReviews()}
+            {renderReviews()}
+          </Row>
+          <br></br>
           {user?
-          <h4 onClick={handleNewReview}>Write a Review!</h4>:
+          <Button onClick={handleNewReview}>Write a Review!</Button>:
           <h4>Login to leave a review!</h4>
           }
       </div>

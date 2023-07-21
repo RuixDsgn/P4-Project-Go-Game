@@ -40,7 +40,8 @@ const Signup = ({ onRegister }) => {
   }
   
     return (
-      <div>
+      <div style={{textAlign: 'center'}}>
+        <img src="https://camo.githubusercontent.com/558a9e1af3cdb7fe71bc706ee9c6fe7c662097fc3fd95a910880092bd8b71957/68747470733a2f2f696d6775722e636f6d2f50323271655a4d2e676966" alt="pacman-loading" />
         <h3>Sign up</h3>
       <form onSubmit={handleSubmit}>
         <input
@@ -49,12 +50,16 @@ const Signup = ({ onRegister }) => {
           placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         />
+        <br></br>
+        <br></br>
         <input 
           type="text"
           value={password}
           placeholder="password"
           onChange= {(e) => setPassword(e.target.value)}
         />
+        <br></br>
+        <br></br>
         <button type="submit">Register</button>
       </form>
       <h4>Already a user? Sign in here!</h4>
