@@ -15,11 +15,11 @@ function SearchGame({games, searchGames, setSearchGames}) {
 
   const handleGameSearch = e => {
     setSearchGames(e.target.value)
-    console.log(searchGames)
+    // console.log(searchGames)
   }
 
   return (
-    <div>
+    <div style={{"padding-top":"5px", "margin-top":"-100px", float:"right"}}>
         <Input style={{width: '30%', marginLeft: '340px'}} placeholder="search for games here" onChange={handleGameSearch}/>
         <Button type="primary" onClick={handleSubmit}>Search</Button>
     </div>
