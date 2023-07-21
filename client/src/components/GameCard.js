@@ -72,6 +72,7 @@ const GameCard = ({game = {}}) => {
     <Col sm={4} md={6} lg={8}>
     <Card 
     style={{
+
       width: 300, marginBottom: '20px', marginRight: '10px'
     }}
     cover={
@@ -87,7 +88,7 @@ const GameCard = ({game = {}}) => {
       </NavLink>
     }
     actions={[
-      <LikeOutlined key="like" onClick={handleWishList}/>,
+      <LikeOutlined key="like" onClick={handleWishList} />,
       <EditOutlined key="edit" onClick={handleReviewNav}/>,
       <ShoppingCartOutlined key='cart'/>,
     ]}

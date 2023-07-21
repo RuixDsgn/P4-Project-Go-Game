@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GameCard from './GameCard';
+import { Row} from 'antd'
 
 const SearchResults = ({ results }) => {
   const [result, setResult] = useState([]);
@@ -20,7 +21,9 @@ const SearchResults = ({ results }) => {
   return (
     <div>
       <h2>Search</h2>
-      {renderSearch()}
+      <Row gutter={16}>
+        {renderSearch()}
+      </Row>
     </div>
   );
 };

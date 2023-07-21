@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GameCard from "./GameCard";
+
 import {Col, Row} from 'antd'
 
 const Wishlist = ({ user }) => {

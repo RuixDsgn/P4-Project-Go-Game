@@ -81,7 +81,7 @@ const NavBar = ({user}) => {
     navigate(`/${e.key}`)
   };
 
-  return <Menu style={{position: 'relative', display: 'flex', justifyContent: 'center'}} onClick={handleClick} selectedKeys={[current]} mode="horizontal" items={items} />
+  return <Menu style={{position: 'relative', display: 'flex', justifyContent: 'center', "background-color": "rgb(254, 255, 245)"}} onClick={handleClick} selectedKeys={[current]} mode="horizontal" items={items} />
   
 
 };
