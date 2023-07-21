@@ -9,14 +9,10 @@ const Profile = ({user}) => {
         .then((response) => response.json())
         .then((reviewData) => {
           setReviews(reviewData);
-          console.log(reviewData);
+          // console.log(reviewData);
           setIsLoaded(true)
         });
   },[])
-
-  const name = user?.name ?? "Loading...";
-  const created_at = user?.created_at ?? "Loading...";
- 
   function renderReviews(){
     if(reviews.length > 0){
       const userReviews = reviews.filter((review) => review.user_id == user.id)
@@ -29,7 +25,8 @@ const Profile = ({user}) => {
       return <h4>User Has No Reviews</h4>
     }
   }
-
+  const name = user?.name ?? "Loading...";
+  const created_at = user?.created_at ?? "Loading...";
   return (
     <div>
       <h2>{user ? name : null}</h2>

@@ -12,6 +12,7 @@ import GameProduct from "./GameProductPage";
 import Profile from "./Profile";
 import NewReview from "./NewReview";
 import Wishlist from "./Wishlist"
+import ReviewPage from "./ReviewPage"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -50,8 +51,8 @@ function App() {
       .then(r => r.json())
       .then(nintendoGameData => {
         setAllSwitchGames(nintendoGameData)
-        console.log(nintendoGameData)
-        console.log(allSwitchGames)
+        // console.log(nintendoGameData)
+        // console.log(allSwitchGames)
       })
     
     fetch('/games/xbox')
@@ -89,7 +90,8 @@ function App() {
       <Route path='/search' element = {<SearchResults results = {searchGames}/>}/>
       <Route path='/product/:id' element = {<GameProduct  />}/>
       <Route path='/profile' element = {<Profile user = {user}/>}/>
-      <Route path="/reviews/new" element = {<NewReview />}/>
+      <Route path="/reviews/new/:id" element = {<NewReview user = {user}/>}/>
+      <Route path="/reviews/:id" element = {<ReviewPage user = {user}/>}/>
       <Route path="/wishlist/" element = {<Wishlist />}/>
       <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
     </Routes>
