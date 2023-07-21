@@ -8,34 +8,49 @@ function Login({ onLogin }) {
 
     function handleSubmit(e) {
       e.preventDefault();
-      fetch("/login", {
-        method: "POST",
+
+      fetch('/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           username: username,
-          password: password 
-      }),
+          password: password,
+        }),
       })
-        .then((r) => r.json())
-        .then((user) => {
-          onLogin(user)
-          navigate("/")
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.message) {
+            // Login successful, set user state and navigate to home
+            onLogin(data);
+            navigate('/');
+          } else {
+            // Login failed, display error message (optional)
+            console.log('Login failed:', data.message);
+            alert('Login failed');
+          }
+        })
+        .catch((error) => {
+          // Handle fetch or other errors (optional)
+          console.error('Error during login:', error);
         });
     }
   
     return (
       <div>
+                <h3>Login</h3>
         <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={username}
+          placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="text"
           value={password}
+          placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>

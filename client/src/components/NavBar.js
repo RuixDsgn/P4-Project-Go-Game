@@ -30,10 +30,11 @@ const NavBar = ({user}) => {
           type: 'group',
           label: 'account',
           children: [
-            // {
-            //   label: 'orders',
-            //   key: 'orders',
-            // },
+            {
+              label: "profile", // Change this label to whatever you want to display as the user's name
+              key: `profile`,
+              // link: `/profile/${user.id}`,
+            },
             {
               label: 'wishlist',
               key: 'wishlist',
