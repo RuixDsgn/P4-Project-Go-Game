@@ -84,11 +84,11 @@ const check = (e) => {setEditContent(e.target.value); console.log(e.target.value
             <div>
               <button onClick={()=> {setEditMode(true);setEditContent(review.content);}}>Edit</button>
               <button onClick={handleDelete}>Delete</button>
-              <button onClick={handleBack}>Back</button>
             </div>
           )}
         </div>
       ) : null}
+    <button onClick={handleBack}>Back</button>
     </div>
   );
 };
