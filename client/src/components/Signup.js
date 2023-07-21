@@ -8,41 +8,51 @@ const Signup = ({ onRegister }) => {
     
     function handleSubmit(e) {
       e.preventDefault();
-      // console.log(username)
-      // console.log(password)
-      fetch("/register", {
-        method: "POST",
+  
+      fetch('/register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          "username": username, 
-          "password": password 
+        body: JSON.stringify({
+          username: username,
+          password: password,
         }),
       })
-        .then((r) => r.json())
-        .then((user) => {
-          if(!user.errors){
-            onRegister(user)
-            navigate("/")
-          }
-          else{
-            console.log("registration failed")
-          }
-          });
-    }
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Registration failed');
+        }
+      })
+      .then((data) => {
+        // Registration successful, set user state and navigate to home
+        onRegister(data);
+        navigate('/');
+      })
+      .catch((error) => {
+        // Registration failed, clear user state (optional) and display error message
+        onRegister(null);
+        console.error('Error during registration:', error);
+        alert(error)
+      });
+  }
   
     return (
       <div>
+        <h3>Sign up</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={username}
+          placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <input 
           type="text"
           value={password}
+          placeholder="password"
           onChange= {(e) => setPassword(e.target.value)}
         />
         <button type="submit">Register</button>

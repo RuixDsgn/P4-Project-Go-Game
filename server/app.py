@@ -275,7 +275,6 @@ class CheckSession(Resource):
             return user.to_dict()
         else:
             return {'message': '401: Not Authorized'}, 401
-
 api.add_resource(CheckSession, '/check_session')
 
 class Logout(Resource):
@@ -283,7 +282,6 @@ class Logout(Resource):
     def delete(self):
         session['user_id'] = None
         return {}, 204
-
 api.add_resource(Logout, '/logout')
 
 if __name__ == '__main__':

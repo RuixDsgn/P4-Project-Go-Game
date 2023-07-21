@@ -30,18 +30,13 @@ class User(db.Model, SerializerMixin):
     def validate_name(self, key, name):
         print("name")
         forbidden_words = ['fuck','shit','bitch']
-        existing_user = User.query.filter(User.name.lower() == name.lower()).first()
-        if not existing_user:
-            if 5 <= len(name) <= 20 and ' ' not in name:
-                for word in forbidden_words:
-                    if word not in name.lower():
-                        return name
-                    else:
-                        raise ValueError('Language.')
-            else:
-                raise ValueError('Name must be between 5 and 20 characters and have no spaces.')
+        # existing_user = User.query.filter(User.name.lower() == name.lower()).first()
+        if 5 <= len(name) <= 20 and ' ' not in name:
+            return name
         else:
-            raise ValueError('Name is already taken.')
+            raise ValueError('Name must be between 5 and 20 characters and have no spaces.')
+        # else:
+        #     raise ValueError('Name is already taken.')
 
     @property
     def password(self):

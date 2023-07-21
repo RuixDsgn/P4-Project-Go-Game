@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import GameReviewCard from './GameReviewCard'
 import GameCard from './GameCard'
 import { Row, Col, Card, Button } from 'antd'
 import { HeartOutlined } from '@ant-design/icons'
 
-const GameProduct = () => {
-
+const GameProduct = ({user}) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [game, setGame] = useState({})
   const [isLoaded, setIsLoaded] = useState(false)
@@ -113,6 +113,10 @@ const GameProduct = () => {
     }
   }
 
+  function handleNewReview(){
+    navigate(`/reviews/new/${game.id}`)
+  }
+
   return (
     isLoaded ? 
     <div style={{marginLeft: '50px'}}>
@@ -137,6 +141,10 @@ const GameProduct = () => {
       <div>
           <h4>Recent reviews from players</h4>
           {renderReviews()}
+          {user?
+          <h4 onClick={handleNewReview}>Write a Review!</h4>:
+          <h4>Login to leave a review!</h4>
+          }
       </div>
       <br></br><br></br>
       <div>

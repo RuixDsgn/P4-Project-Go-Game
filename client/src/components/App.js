@@ -89,7 +89,7 @@ function App() {
       <Route path="/cart" element={<Cart />}/>
       <Route path='/register' element = {<Signup onRegister ={handleUser}/>}/>
       <Route path='/search' element = {<SearchResults results = {searchGames}/>}/>
-      <Route path='/product/:id' element = {<GameProduct  />}/>
+      <Route path='/product/:id' element = {<GameProduct  user={user}/>}/>
       <Route path='/profile' element = {<Profile user = {user}/>}/>
       <Route path="/reviews/new/:id" element = {<NewReview user = {user}/>}/>
       <Route path="/reviews/:id" element = {<ReviewPage user = {user}/>}/>
