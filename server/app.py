@@ -142,8 +142,8 @@ class ReviewsById(Resource):
         review_get = Review.query.filter_by(id=id).first()
         if review_get:
             try:
-                for attr in request.form:
-                    setattr(review_get, attr, request.form[attr])
+                review_get.content = request.json.get('content')
+                # Update other attributes as needed
                 db.session.commit()
                 return make_response(review_get.to_dict(), 202)
             except ValueError as e:
