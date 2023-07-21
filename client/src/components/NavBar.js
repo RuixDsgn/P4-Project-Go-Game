@@ -76,7 +76,7 @@ const NavBar = ({user}) => {
   const [current, setCurrent] = useState('order');
 
   const handleClick = (e) => {
-    console.log(e);
+    // console.log(e);
     setCurrent(e.key);
     navigate(`/${e.key}`)
   };
