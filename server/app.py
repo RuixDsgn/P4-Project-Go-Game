@@ -147,6 +147,7 @@ class ReviewsById(Resource):
                 db.session.commit()
                 return make_response(review_get.to_dict(), 202)
             except ValueError as e:
+                db.rollback()
                 return make_response({'error': str(e)}, 400)
         else:
             return make_response({"error": "Review not found"}, 404)
