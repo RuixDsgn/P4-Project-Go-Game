@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ShoppingCartOutlined, UserAddOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({user}) => {
+
   const navigate = useNavigate();
   const items = [
     {
@@ -23,7 +24,7 @@ const NavBar = ({user}) => {
           label: user.name, // Change this label to whatever you want to display as the user's name
           key: 'profile',
           link: '/profile',
-          icon: <UserAddOutlined />,
+          icon: <UserOutlined />,
           children: [
         {
           type: 'group',
@@ -72,15 +73,15 @@ const NavBar = ({user}) => {
     }
   ];
   const [current, setCurrent] = useState('order');
+
   const handleClick = (e) => {
     console.log(e);
     setCurrent(e.key);
     navigate(`/${e.key}`)
   };
 
-  return (
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" items={items} />
-  );
+  return <Menu style={{position: 'relative', display: 'flex', justifyContent: 'center'}} onClick={handleClick} selectedKeys={[current]} mode="horizontal" items={items} />
+  
 
 };
 export default NavBar;
