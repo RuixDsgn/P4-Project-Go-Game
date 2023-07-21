@@ -58,8 +58,6 @@ class User(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False)
-    rating = db.Column(db.Integer)
     content = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     game_id = db.Column(db.Integer)
@@ -69,9 +67,9 @@ class Review(db.Model, SerializerMixin):
     @validates('content')
     def validate_content(self, key, content):
         forbidden_words = ['fuck','shit','bitch']
-        if 50 < len(content):
+        if 15 < len(content):
             for word in forbidden_words:
-                if word in func.lower(content):
+                if word in content.lower():
                     raise ValueError("Language.")
             return content
         else:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+from ipdb import set_trace
 from config import app, api
 from models import User, Review, Wishlist, Cart, Order
 from flask import Flask, request, make_response, session, jsonify
@@ -91,6 +92,16 @@ class Pc(Resource):
         return response.json()
 api.add_resource(Pc, '/games/pc')
 
+class UserById(Resource):
+    def get(self, id):
+        user_get = User.query.filter_by(id=id).first()
+        if user_get:
+            print(user_get)
+            return make_response(user_get.to_dict(), 200)
+        else:
+            return make_response({"error": "user not found"}, 404)      
+api.add_resource(UserById, '/users/<int:id>')  
+
 class Reviews(Resource):
     def get(self):
         reviews_list = [review.to_dict() for review in Review.query.all()]
@@ -100,13 +111,13 @@ class Reviews(Resource):
         try:
             new_review = Review(
                 content=form_json['content'],
-                rating=form_json['rating'],
+                # rating=form_json['rating'],
                 user_id=form_json['user_id'],
                 game_id=form_json['game_id'],
-                title = form_json['title']
             )
             db.session.add(new_review)
             db.session.commit()
+
             return make_response(new_review.to_dict(), 201)
         except ValueError as e:
             return make_response({'error': str(e)}, 400)

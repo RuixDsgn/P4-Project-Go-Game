@@ -17,7 +17,7 @@ const GameProduct = () => {
       .then((response) => response.json())
       .then((gameData) => {
         setGame(gameData[0]);
-        console.log(gameData[0]);
+        // console.log(gameData[0]);
         setIsLoaded(true)
         setLoadImg(gameData[0].cover.url)
       });
@@ -42,7 +42,7 @@ const GameProduct = () => {
         .then((response) => response.json())
         .then((reviewData) => {
           setReviews(reviewData);
-          console.log(reviewData);
+          // console.log(reviewData);
         });
   },[])
 
@@ -52,7 +52,7 @@ const GameProduct = () => {
       while(reviews.length > 3){
         reviews.pop()
       }
-      console.log(gameReviews)
+      // console.log(gameReviews)
       return gameReviews.map((review) => {
         return <GameReviewCard review = {review}/>
       })

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { EditOutlined, ShoppingCartOutlined, LikeOutlined } from '@ant-design/icons';
 import { Avatar, Card, Col } from 'antd';
 
@@ -7,6 +7,7 @@ const { Meta } = Card;
 const GameCard = ({game}) => {
   const {id, name, cover, genres} = game;
   let genreSet = new Set();
+  const navigate = useNavigate()
 
   if (genres && genres.length > 0) {
     genres.forEach((genre) => {
@@ -20,6 +21,10 @@ const GameCard = ({game}) => {
   const genreList = Array.from(genreSet);
   const description = genreList.join(", ");
   // console.log(description);
+
+  function handleReviewNav(){
+    navigate(`/reviews/new/${id}`)
+  }
 
 
   return(
@@ -42,7 +47,7 @@ const GameCard = ({game}) => {
     }
     actions={[
       <LikeOutlined key="like"/>,
-      <EditOutlined key="edit" />,
+      <EditOutlined key="edit" onClick={handleReviewNav}/>,
       <ShoppingCartOutlined key='cart'/>,
     ]}
   >
