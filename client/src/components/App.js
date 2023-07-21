@@ -13,6 +13,7 @@ import Profile from "./Profile";
 import NewReview from "./NewReview";
 import Wishlist from "./Wishlist"
 import ReviewPage from "./ReviewPage"
+import Logout from "./Logout"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -93,6 +94,7 @@ function App() {
       <Route path="/reviews/new/:id" element = {<NewReview user = {user}/>}/>
       <Route path="/reviews/:id" element = {<ReviewPage user = {user}/>}/>
       <Route path="/wishlist/" element = {<Wishlist />}/>
+      <Route path="/logout" element={<Logout />}/>
       <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
     </Routes>
 

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { ShoppingCartOutlined, UserAddOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({user}) => {
+  const navigate = useNavigate();
   const items = [
     {
       label: 'track your order',
-      key: 'order',
+      key: 'orders',
       link: '/orders'
     },
     {
       label: 'all games',
-      key: 'game',
+      key: 'all_games',
       link: '/all_games',
       // icon: <FontAwesomeIcon icon="fa-solid fa-gamepad" />,
       disabled: false,
@@ -20,7 +21,7 @@ const NavBar = ({user}) => {
     user
       ? {
           label: user.name, // Change this label to whatever you want to display as the user's name
-          key: 'user',
+          key: 'profile',
           link: '/profile',
           icon: <UserAddOutlined />,
           children: [
@@ -28,10 +29,10 @@ const NavBar = ({user}) => {
           type: 'group',
           label: 'account',
           children: [
-            {
-              label: 'orders',
-              key: 'orders',
-            },
+            // {
+            //   label: 'orders',
+            //   key: 'orders',
+            // },
             {
               label: 'wishlist',
               key: 'wishlist',
@@ -42,13 +43,17 @@ const NavBar = ({user}) => {
           type: 'group',
           label: 'activitiy',
           children: [
+            // {
+            //   label: 'my reviews',
+            //   key: 'review',
+            // },
+            // {
+            //   label: 'favorited games',
+            //   key: 'favorite',
+            // },
             {
-              label: 'my reviews',
-              key: 'review',
-            },
-            {
-              label: 'favorited games',
-              key: 'favorite',
+              label: 'logout',
+              key: 'logout',
             },
           ],
         },
@@ -68,20 +73,13 @@ const NavBar = ({user}) => {
   ];
   const [current, setCurrent] = useState('order');
   const handleClick = (e) => {
-    // console.log(e);
+    console.log(e);
     setCurrent(e.key);
+    navigate(`/${e.key}`)
   };
 
   return (
-    <Menu style={{position: 'relative', display: 'flex', justifyContent: 'center'}} onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-      <nav>
-        {items.map((item) => (
-            <Menu.Item key={item.key} icon={item.icon}>
-              <NavLink to={item.link}>{item.label}</NavLink>
-            </Menu.Item>
-        ))}
-      </nav>
-    </Menu>
+    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" items={items} />
   );
 
 };
