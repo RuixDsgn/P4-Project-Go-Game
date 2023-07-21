@@ -58,7 +58,7 @@ function Login({ onLogin }) {
         />
         <br></br>
         <br></br>
-        <button type="submit">Login</button>
+        <button style={{ backgroundColor: '#1777FF', color: 'white', borderStyle: 'none', borderRadius: '5px', padding: '10px', width: '100px'}} type="submit">Login</button>
       </form>
       <h4>Not a user? Sign up <Link to ="/register">here!</Link></h4>
       </div>

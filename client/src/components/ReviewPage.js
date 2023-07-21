@@ -59,17 +59,20 @@ const ReviewPage = ({user}) => {
 const check = (e) => {setEditContent(e.target.value); console.log(e.target.value)}
 
   return (
-    <div>
+    <div style={{textAlign: 'center'}}>
       <h4>
         {editMode ? (
           <form onSubmit={handleSubmitEdit}>
             <input
+              style={{width: '300px', height: '150px'}}
               type="text"
               onChange={check}
               value={editContent}
             />
-            <button type="submit">Submit</button>
-            <button type="button" onClick={() => setEditMode(false)}>
+            <br></br>
+            <br></br>
+            <button style={{ backgroundColor: '#1777FF', marginRight: '5px', borderStyle: 'none', borderRadius: '5px', padding: '10px', width: '100px'}} type="submit">Submit</button>
+            <button style={{ borderStyle: 'none', borderRadius: '5px', padding: '10px', width: '100px'}} type="button" onClick={() => setEditMode(false)}>
               Cancel
             </button>
           </form>
@@ -77,18 +80,19 @@ const check = (e) => {setEditContent(e.target.value); console.log(e.target.value
           review?.content ?? 'Loading...'
         )}
       </h4>
-      <p>Written by {author ?? 'Loading...'}</p>
+      <h5>Written by {author ?? 'Loading...'}</h5>
       {user?.name??null === author ? (
         <div>
           {editMode ? null : (
             <div>
-              <button onClick={()=> {setEditMode(true);setEditContent(review.content);}}>Edit</button>
-              <button onClick={handleDelete}>Delete</button>
+              <button style={{ backgroundColor:'#1777FF', color: 'white', marginRight: '5px', borderStyle: 'none', borderRadius: '5px', padding: '10px', width: '100px'}} onClick={()=> {setEditMode(true);setEditContent(review.content);}}>Edit</button>
+              <button style={{ backgroundColor: 'white', borderColor: '#E70111', color: 'black', borderRadius: '5px', padding: '10px', width: '100px'}} onClick={handleDelete}>Delete</button>
             </div>
           )}
         </div>
       ) : null}
-    <button onClick={handleBack}>Back</button>
+    <br></br>
+    <button style={{ backgroundColor: 'white', borderColor: '#1777FF', color: 'black', borderRadius: '5px', padding: '10px', width: '100px'}} onClick={handleBack}>Back</button>
     </div>
   );
 };
