@@ -91,15 +91,26 @@ const GameProduct = ({user}) => {
 
   }
 
-  const minPrice = 39.99;
-  const maxPrice = 69.99;
+  // const minPrice = 39.99;
+  // const maxPrice = 69.99;
+  // const getRandomPrice = () => {
+  // const price = (Math.random() * (maxPrice - minPrice) + minPrice).toFixed(2);
+  // return price;
+  // }
 
-  const getRandomPrice = () => {
-  const price = (Math.random() * (maxPrice - minPrice) + minPrice).toFixed(2);
-  return price;
+  function setPrice(){
+    if (game.rating < 88) {
+      return '49.99'
+    }
+    else if ( game.rating < 93 && game.rating >= 88) {
+      return '59.99'
+    }
+    else if (game.rating >= 93) {
+      return '69.99'
+    }
   }
 
-  const generatedPrice = getRandomPrice()
+  const generatedPrice = setPrice()
   
   function setRating(){
     if (game.rating < 88) {
@@ -142,6 +153,7 @@ const GameProduct = ({user}) => {
           <h4>Recent reviews from players</h4>
           <Row>
           {renderReviews()}
+          </Row>
           {user?
           <h4 onClick={handleNewReview}>Write a Review!</h4>:
           <h4>Login to leave a review!</h4>
