@@ -28,7 +28,13 @@ const GameProduct = () => {
   }
 
   function renderScreenshots(){
-    return game.screenshots.map((screenshot)=> {
+
+    const displayImages = []
+    displayImages.push(game.cover)
+    game.screenshots.map((screenshot)=>{
+      displayImages.push(screenshot)
+    })
+    return displayImages.map((screenshot)=> {
       return (
         <Col>
            <img onMouseEnter={ (e) => {setLoadImg(e.target.src)}} style={{width: '50px', height: '50px', marginRight: '10px'}} src={screenshot.url}/>

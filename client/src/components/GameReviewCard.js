@@ -10,7 +10,7 @@ const GameReviewCard = ({review}) => {
         .then((r)=>r.json())
         .then((userData)=>{
           setAuthor(userData.name)
-          console.log(userData.name)
+        //   console.log(userData.name)
         });
       }, [])
     const navigate = useNavigate()
