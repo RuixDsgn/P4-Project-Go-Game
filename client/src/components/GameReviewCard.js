@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Card} from 'antd';
+import {Card, Col} from 'antd';
 import {useNavigate} from "react-router-dom";
 
 const GameReviewCard = ({review}) => {
@@ -29,9 +29,11 @@ const GameReviewCard = ({review}) => {
 
   return (
     <>
-        <Card style={{width: '50%'}} type="inner" title={`Review by ${author}`} extra={<a onClick={handleFullReview}>Read More</a>}>
+        <Col>
+        <Card style={{width: '400px'}} type="inner" title={`Review by ${author}`} extra={<a onClick={handleFullReview}>Read More</a>}>
             {preview}
         </Card>
+        </Col>
     </>
 );  
 }

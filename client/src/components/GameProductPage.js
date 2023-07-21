@@ -136,7 +136,9 @@ const GameProduct = () => {
 
       <div>
           <h4>Recent reviews from players</h4>
+          <Row>
           {renderReviews()}
+          </Row>
       </div>
       <br></br><br></br>
       <div>
