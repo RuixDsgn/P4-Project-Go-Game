@@ -52,7 +52,7 @@ class GamesById(Resource):
         access_token = 'wa64dthtybfhlt4oslfnz85gpjeasu'
         response = post('https://api.igdb.com/v4/games', 
                         **{'headers': {'Client-ID': 'ejajggmd25hikofltc3nwzt34lhf7b', 'Authorization': f'Bearer {access_token}'},
-                        'data': f'fields id, name, rating, first_release_date, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, similar_games.cover.url, similar_games.genres.name, summary, screenshots.url; where id = {id}; limit 1;'})
+                        'data': f'fields id, name, rating, first_release_date, cover.url, genres.name, platforms.name, similar_games.id, similar_games.name, similar_games.cover.url, similar_games.genres.name, summary, screenshots.url; where id = {id}; limit 500;'})
         return response.json()
 api.add_resource(GamesById, '/games/product')
 
@@ -159,13 +159,21 @@ class Wishlists(Resource):
         return make_response(wishlists_list, 200)
     def post(self):
         form_json = request.get_json()
+        user_id = form_json.get('user_id')
+        game_id = form_json.get('game_id')
+
+        if user_id is None or game_id is None:
+            return make_response({'error': 'Invalid request data'}, 400)
+
+        # Check if the entry already exists in the Wishlist
+        existing_wishlist = Wishlist.query.filter_by(user_id=user_id, game_id=game_id).first()
+        if existing_wishlist:
+            return make_response({'error': 'Wishlist entry already exists'}, 409)
+
         try:
             new_wishlist = Wishlist(
-                content=form_json['content'],
-                rating=form_json['rating'],
-                user_id=form_json['user_id'],
-                game_id=form_json['game_id'],
-                title = form_json['title']
+                user_id=user_id,
+                game_id=game_id,
             )
             db.session.add(new_wishlist)
             db.session.commit()
@@ -173,6 +181,25 @@ class Wishlists(Resource):
         except ValueError as e:
             return make_response({'error': str(e)}, 400)
 api.add_resource(Wishlists, '/wishlist')
+
+class WishlistsById(Resource):
+    def get(self, id):
+        wishlist_item = Wishlist.query.filter_by(id=id).first()
+        if wishlist_item:
+            return make_response(wishlist_item.to_dict(), 200)
+        else:
+            return make_response({"error": "Wishlist item not found"}, 404)
+
+    def delete(self, id):
+        wishlist_item = Wishlist.query.filter_by(id=id).first()
+        if wishlist_item:
+            db.session.delete(wishlist_item)
+            db.session.commit()
+            return make_response({}, 204)
+        else:
+            return make_response({"error": "Wishlist item not found"}, 404)
+api.add_resource(WishlistsById, '/wishlist/<int:id>')
+
 
 class Carts(Resource):
     def get(self):
@@ -182,11 +209,8 @@ class Carts(Resource):
         form_json = request.get_json()
         try:
             new_cart = Cart(
-                content=form_json['content'],
-                rating=form_json['rating'],
                 user_id=form_json['user_id'],
                 game_id=form_json['game_id'],
-                title = form_json['title']
             )
             db.session.add(new_cart)
             db.session.commit()
@@ -203,11 +227,8 @@ class Orders(Resource):
         form_json = request.get_json()
         try:
             new_order = Order(
-                content=form_json['content'],
-                rating=form_json['rating'],
                 user_id=form_json['user_id'],
                 game_id=form_json['game_id'],
-                title = form_json['title']
             )
             db.session.add(new_order)
             db.session.commit()
