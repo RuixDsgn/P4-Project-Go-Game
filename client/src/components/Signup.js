@@ -62,8 +62,7 @@ const Signup = ({ onRegister }) => {
         <br></br>
         <button style={{ backgroundColor: '#1777FF', color: 'white', borderStyle: 'none', borderRadius: '5px', padding: '10px', width: '100px'}} type="submit">Register</button>
       </form>
-      <h4>Already a user? Sign in here!</h4>
-      <Link to ="/signin">Sign in</Link>
+      <h4>Already a user? Sign in <Link to ="/signin">here!</Link></h4>
       </div>
     );
   }

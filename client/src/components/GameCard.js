@@ -23,6 +23,14 @@ const GameCard = ({game = {}}) => {
 
   const genreList = Array.from(genreSet);
   const description = genreList.join(", ");
+  let preview;
+  if (description.length > 25){
+      preview = description.slice(0,25) + "..."
+
+  }
+  else {
+      preview = description
+  }
   // console.log(description);
 
   function handleReviewNav(){
@@ -96,7 +104,7 @@ const GameCard = ({game = {}}) => {
     <Meta
       avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
       title={name}
-      description={description || genres}
+      description={preview || genres}
     />
   </Card>
   </Col>

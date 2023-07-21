@@ -59,11 +59,11 @@ const Wishlist = ({ user }) => {
           const wishlistItemId = wishlistItem ? wishlistItem.id : null; // Access the 'id' property
 
           return (
-            <div key={game.id}>
+            <div key={game.id} style={{textAlign:"center"}}>
               <Col>
                 <GameCard game={game[0]} key={game[0].id} />
                 {wishlistItemId && (
-                <button onClick={() => removeFromWishlist(wishlistItemId)}>Remove from List</button>
+                <button style={{ backgroundColor: '#1777FF', color: 'white', borderStyle: 'none', borderRadius: '5px', padding: '15px', width: '150px', "margin-top":"-5px", "margin-bottom":"35px"}} onClick={() => removeFromWishlist(wishlistItemId)}>Remove from List</button>
                 )}
               </Col>
             </div>
