@@ -62,7 +62,7 @@ const GameCard = ({game = {}}) => {
     <Col sm={4} md={6} lg={8}>
     <Card 
     style={{
-      width: 300,
+      width: 300, marginBottom: '20px'
     }}
     cover={
       <NavLink         
@@ -72,7 +72,7 @@ const GameCard = ({game = {}}) => {
       }}>
         <img style={{width: '100%'}}
         alt="example"
-        src={cover ? cover.url : "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"}
+        src={cover ? cover.url : "https://media.istockphoto.com/id/1208386205/vector/joystick-flat-icon-playing-online-gamepad-cartoon-icon-game-controller.jpg?s=612x612&w=0&k=20&c=0UCu7wJNNjJpIaUXe6zyLLXEk3ZX2onolq5aBrbQQY8="}
       />
       </NavLink>
     }

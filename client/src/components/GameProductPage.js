@@ -140,6 +140,7 @@ const GameProduct = ({user}) => {
 
       <div>
           <h4>Recent reviews from players</h4>
+          <Row>
           {renderReviews()}
           {user?
           <h4 onClick={handleNewReview}>Write a Review!</h4>:

@@ -115,4 +115,5 @@ const Wishlist = ({ user }) => {
   );
 };
 
+
 export default Wishlist;

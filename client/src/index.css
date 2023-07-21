@@ -3,7 +3,12 @@ h2 {
     text-align: center;
 }
 
-h4 {
+h3 {
+    font-family: 'Press Start 2P', cursive;
+    margin-left: 10spx;
+}
+
+h4, h5 {
     font-family: 'Open Sans', sans-serif;
 }
 
