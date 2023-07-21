@@ -72,7 +72,9 @@ const GameCard = ({game = {}}) => {
     <Col sm={4} md={6} lg={8}>
     <Card 
     style={{
-      width: 300, marginBottom: '20px'}}
+
+      width: 300, marginBottom: '20px', marginRight: '10px'
+    }}
     cover={
       <NavLink         
         to={{

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GameCard from "./GameCard";
-import { Row} from 'antd'
 
+import {Col, Row} from 'antd'
 
 const Wishlist = ({ user }) => {
   const [wishlists, setWishlists] = useState([]);
@@ -60,10 +60,12 @@ const Wishlist = ({ user }) => {
 
           return (
             <div key={game.id}>
-              <GameCard game={game[0]} key={game[0].id} />
-              {wishlistItemId && (
+              <Col>
+                <GameCard game={game[0]} key={game[0].id} />
+                {wishlistItemId && (
                 <button onClick={() => removeFromWishlist(wishlistItemId)}>Remove from List</button>
-              )}
+                )}
+              </Col>
             </div>
           );
         });
@@ -112,8 +114,8 @@ const Wishlist = ({ user }) => {
   return (
     <div>
       <h2>Wishlist</h2>
-      <Row gutter={20}>
-      {renderedGames.length > 0 ? renderedGames : <div><h1>No games found in the wishlist</h1></div>}
+      <Row>
+        {renderedGames.length > 0 ? renderedGames : <div><h1>No games found in the wishlist</h1></div>}
       </Row>
     </div>
   );

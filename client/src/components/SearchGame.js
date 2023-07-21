@@ -21,6 +21,7 @@ function SearchGame({games, searchGames, setSearchGames}) {
   return (
     <div style={{"padding-top":"5px", "margin-top":"-100px", float:"right"}}>
         <Input style={{width: '30%', marginLeft: '340px'}} placeholder="search for games here" onChange={handleGameSearch}/>
+
         <Button type="primary" onClick={handleSubmit}>Search</Button>
     </div>
 
