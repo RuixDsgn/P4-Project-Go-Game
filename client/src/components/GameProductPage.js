@@ -93,15 +93,26 @@ const GameProduct = ({user}) => {
 
   }
 
-  const minPrice = 39.99;
-  const maxPrice = 69.99;
+  // const minPrice = 39.99;
+  // const maxPrice = 69.99;
+  // const getRandomPrice = () => {
+  // const price = (Math.random() * (maxPrice - minPrice) + minPrice).toFixed(2);
+  // return price;
+  // }
 
-  const getRandomPrice = () => {
-  const price = (Math.random() * (maxPrice - minPrice) + minPrice).toFixed(2);
-  return price;
+  function setPrice(){
+    if (game.rating < 88) {
+      return '49.99'
+    }
+    else if ( game.rating < 93 && game.rating >= 88) {
+      return '59.99'
+    }
+    else if (game.rating >= 93) {
+      return '69.99'
+    }
   }
 
-  const generatedPrice = getRandomPrice()
+  const generatedPrice = setPrice()
   
   function setRating(){
     if (game.rating < 88) {
@@ -133,8 +144,8 @@ const GameProduct = ({user}) => {
                 <p><strong>Title:</strong> {game.name}</p>
                 <p><strong>Genre(s):</strong> {mapGenres()}</p>
                 <p style={{maxWidth: '500px'}}><strong>Platform(s):</strong> {mapPlatforms()}</p>
-                <p><strong>Rating: {setRating()}</strong></p>
-                <p><strong>$</strong>{generatedPrice}</p>
+                <p><strong>Rating: {game.rating?setRating():"⭐️⭐️"}</strong></p>
+                <p><strong>$</strong>{game.rating?generatedPrice:"39.99"}</p>
                 <Button style={{marginRight: '10px'}} type="primary">add to cart</Button>
                 <Button icon={<HeartOutlined />} href="" />
               </div>

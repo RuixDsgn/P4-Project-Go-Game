@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { EditOutlined, ShoppingCartOutlined, LikeOutlined } from '@ant-design/icons';
 import { Avatar, Card, Col } from 'antd';
+import { UserContext } from './App';
+
 
 const { Meta } = Card;
-const GameCard = ({game}) => {
+const GameCard = ({game = {}}) => {
+  const user = useContext(UserContext);
   const {id, name, cover, genres} = game;
   let genreSet = new Set();
   const navigate = useNavigate()
@@ -26,6 +29,34 @@ const GameCard = ({game}) => {
     navigate(`/reviews/new/${id}`)
   }
 
+  function handleWishList(e) {
+    e.preventDefault();
+    // console.log(user.id)
+    // console.log(id)  
+    fetch('/wishlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+        game_id: id,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // The wishlist item was successfully added
+          // You can perform additional actions if needed
+          console.log('Wishlist item added successfully!');
+        } else {
+          // Handle the error when the wishlist item couldn't be added
+          console.error('Failed to add wishlist item');
+        }
+      })
+      .catch((error) => {
+        console.error('Error while adding wishlist item:', error);
+      });
+  }
 
   return(
     <Col sm={4} md={6} lg={8}>
@@ -46,7 +77,7 @@ const GameCard = ({game}) => {
       </NavLink>
     }
     actions={[
-      <LikeOutlined key="like"/>,
+      <LikeOutlined key="like" onClick={handleWishList}/>,
       <EditOutlined key="edit" onClick={handleReviewNav}/>,
       <ShoppingCartOutlined key='cart'/>,
     ]}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import GamesAll from "./GamesAll";
@@ -14,6 +14,9 @@ import NewReview from "./NewReview";
 import Wishlist from "./Wishlist"
 import ReviewPage from "./ReviewPage"
 import Logout from "./Logout"
+import GameCard from "./GameCard"
+
+export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
@@ -79,6 +82,8 @@ function App() {
 
 
   return <div>
+    <UserContext.Provider value={user}>
+      {/* <GameCard /> */}
     <Header user = {user} games={allGames} searchGames={searchGames} setSearchGames={setSearchGames}/>
     <br></br>
     <br></br>
@@ -93,10 +98,11 @@ function App() {
       <Route path='/profile' element = {<Profile user = {user}/>}/>
       <Route path="/reviews/new/:id" element = {<NewReview user = {user}/>}/>
       <Route path="/reviews/:id" element = {<ReviewPage user = {user}/>}/>
-      <Route path="/wishlist/" element = {<Wishlist />}/>
+      <Route path="/wishlist/" element = {<Wishlist user = {user} games = {allGames}/>}/>
       <Route path="/logout" element={<Logout />}/>
       <Route path='/' element = {<Home xbox = {allXboxGames} playstation = {allPlayStationGames} nintendo = {allSwitchGames} pc = {allPCGames}/>}/>
     </Routes>
+    </UserContext.Provider>
 
   </div>
 }
