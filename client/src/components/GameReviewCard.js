@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Card} from 'antd';
 import {useNavigate} from "react-router-dom";
 
 const GameReviewCard = ({review}) => {
+    const [author, setAuthor] = useState("")
+    useEffect(()=>{
+        console.log(review.user_id);
+        fetch(`/users/${review.user_id}`)
+        .then((r)=>r.json())
+        .then((userData)=>{
+          setAuthor(userData.name)
+          console.log(userData.name)
+        });
+      }, [])
     const navigate = useNavigate()
     let preview;
     if (review.length > 25){
@@ -19,7 +29,7 @@ const GameReviewCard = ({review}) => {
 
   return (
     <>
-        <Card style={{width: '50%'}} type="inner" title="Inner Card title" extra={<a onClick={handleFullReview}>More</a>}>
+        <Card style={{width: '50%'}} type="inner" title={`Review by ${author}`} extra={<a onClick={handleFullReview}>More</a>}>
             {preview}
         </Card>
     </>
