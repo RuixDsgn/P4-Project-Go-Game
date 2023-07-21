@@ -142,8 +142,8 @@ const GameProduct = ({user}) => {
                 <p><strong>Title:</strong> {game.name}</p>
                 <p><strong>Genre(s):</strong> {mapGenres()}</p>
                 <p style={{maxWidth: '500px'}}><strong>Platform(s):</strong> {mapPlatforms()}</p>
-                <p><strong>Rating: {setRating()}</strong></p>
-                <p><strong>$</strong>{generatedPrice}</p>
+                <p><strong>Rating: {game.rating?setRating():"⭐️⭐️"}</strong></p>
+                <p><strong>$</strong>{game.rating?generatedPrice:"39.99"}</p>
                 <Button style={{marginRight: '10px'}} type="primary">add to cart</Button>
                 <Button icon={<HeartOutlined />} href="" />
               </div>
