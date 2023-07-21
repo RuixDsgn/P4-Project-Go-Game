@@ -15,8 +15,8 @@ const GameReviewCard = ({review}) => {
       }, [])
     const navigate = useNavigate()
     let preview;
-    if (review.length > 25){
-        preview = review.content.slice(0,25) + "..."
+    if (review.content.length > 50){
+        preview = review.content.slice(0,50) + "..."
 
     }
     else {
@@ -29,7 +29,7 @@ const GameReviewCard = ({review}) => {
 
   return (
     <>
-        <Card style={{width: '50%'}} type="inner" title={`Review by ${author}`} extra={<a onClick={handleFullReview}>More</a>}>
+        <Card style={{width: '50%'}} type="inner" title={`Review by ${author}`} extra={<a onClick={handleFullReview}>Read More</a>}>
             {preview}
         </Card>
     </>
