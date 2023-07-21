@@ -26,36 +26,46 @@ const GameCard = ({game = {}}) => {
   // console.log(description);
 
   function handleReviewNav(){
-    navigate(`/reviews/new/${id}`)
+    if(!user){
+      alert("You must be logged in to use this feature!")
+    }
+    else{navigate(`/reviews/new/${id}`)
+  }  
   }
 
   function handleWishList(e) {
-    e.preventDefault();
-    // console.log(user.id)
-    // console.log(id)  
-    fetch('/wishlist', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: user.id,
-        game_id: id,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // The wishlist item was successfully added
-          // You can perform additional actions if needed
-          console.log('Wishlist item added successfully!');
-        } else {
-          // Handle the error when the wishlist item couldn't be added
-          console.error('Failed to add wishlist item');
-        }
+    if(!user){
+      alert("You must be logged in to use this feature!")
+    }
+    else{
+      e.preventDefault();
+      // console.log(user.id)
+      // console.log(id)  
+      fetch('/wishlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: user.id,
+          game_id: id,
+        }),
       })
-      .catch((error) => {
-        console.error('Error while adding wishlist item:', error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            // The wishlist item was successfully added
+            // You can perform additional actions if needed
+            console.log('Wishlist item added successfully!');
+          } else {
+            // Handle the error when the wishlist item couldn't be added
+            console.error('Failed to add wishlist item');
+          }
+        })
+        .catch((error) => {
+          console.error('Error while adding wishlist item:', error);
+        });
+    }
+
   }
 
   return(

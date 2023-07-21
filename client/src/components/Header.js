@@ -8,7 +8,7 @@ const Header = ({user, games, searchGames,setSearchGames}) => {
   return (
     <div>
       <Link to="/">
-        <h2>GoGame.GG🎮</h2>
+        <h2>🎮GoGame.GG🎮</h2>
       </Link>
         <div>
           <NavBar user = {user}/>
